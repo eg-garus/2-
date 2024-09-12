@@ -22,10 +22,35 @@ public class Main {
 
     }
 
-    public static List<Boolean> deCoder(boolean a, boolean b, boolean c) {
-        List<Boolean> list = new ArrayList<>();
+    public static void deCoder(boolean a, boolean b, boolean c) {
+        List<Boolean> list = new ArrayList<>(9);
+        list.add(a&b&c);
+        list.add(a&b&!c);
+        list.add(a&!b&c);
+        list.add(a&!b&!c);
+        list.add(!a&b&c);
+        list.add(!a&b&!c);
+        list.add(!a&!b&c);
+        list.add(!a&!b&!c);
+        System.out.println(list);
+    }
+    static boolean q = false;
+    static boolean qn = false;
+    public static void rsTrigger(boolean r,boolean s) {
 
-        return list;
+        if (r&!s) {
+            q = false;
+            qn = true;
+            System.out.println("Q: " + q + ", Q': " + qn);
+        } else if (!r&s) {
+            q = true;
+            qn = false;
+            System.out.println("Q: " + q + ", Q': " + qn);
+        } else if (!r&!s) {
+            System.out.println("Q: " + q + ", Q': " + qn);
+        } else if (r&s) {
+            System.err.println("Работа в хаотичном режиме");
+        }
     }
 
     public static void main(String[] args) {
@@ -35,6 +60,22 @@ public class Main {
             }
         }
 
+        System.out.println();
 
+        for(int i=0;i<=1;i++){
+            for(int j =0; j<=1;j++){
+                for(int x =0; x<=1;x++) {
+                    deCoder(returnLog(i),returnLog(j),returnLog(x));
+                }
+            }
+        }
+
+        System.out.println();
+
+        for(int i=0;i<=1;i++) {
+            for(int j=0;j<=1;j++) {
+                rsTrigger(returnLog(i),returnLog(j));
+            }
+        }
     }
 }
